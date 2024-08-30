@@ -1,0 +1,17 @@
+Outputs:
+  LoadBalancerDNS:
+    Description: The DNS for the load balancer
+    Value: !GetAtt Felix-k8sLoadBalancer.DNSName
+  DynamoTable:
+    Value: !Ref Felix-k8sDynamoTable
+  SiteBucket:
+    Value: !Ref Felix-k8sBucket
+    Condition: MakeBucket
+  Cloud9Env:
+    Value: 
+      !Join ["",["https://",!Ref "AWS::Region",".console.aws.amazon.com/cloud9/ide/",!Ref Felix-k8sEnvironment,"?region=",!Ref "AWS::Region"]]
+  ProfileName:
+    Value: !Ref Felix-k8sProfile
+  S3WebsiteURL:
+    Description: This is the DNS name of your S3 site
+    Value: !GetAtt Felix-k8sBucket.WebsiteURL

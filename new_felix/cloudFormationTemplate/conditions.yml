@@ -1,0 +1,5 @@
+
+
+Conditions:
+  MakeBucket:
+    Fn::Equals: ["false", !Ref SkipBucket]

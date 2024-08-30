@@ -1,0 +1,24 @@
+
+  Felix-k8sMonolithService:
+    Type: AWS::ECS::Service
+    DependsOn: Felix-k8sListener
+    Properties:
+      Cluster: !Ref Felix-k8sEcsCluster
+      DeploymentConfiguration:
+        MinimumHealthyPercent: 0
+        MaximumPercent: 200
+      DesiredCount: 1
+      LaunchType: FARGATE
+      LoadBalancers:
+        - ContainerName: monolith-service
+          ContainerPort: 80
+          TargetGroupArn: !Ref Felix-k8sMonolithTargetGroup
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: DISABLED
+          SecurityGroups:
+            - !Ref FargateContainerSecurityGroup
+          Subnets:
+            - !Ref PrivateSubnetOne
+            - !Ref PrivateSubnetTwo
+      TaskDefinition: !Ref Felix-k8sMonolithTaskDefinition

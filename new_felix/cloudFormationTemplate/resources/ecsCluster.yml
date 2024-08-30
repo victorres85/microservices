@@ -1,0 +1,6 @@
+
+
+  Felix-k8sEcsCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: !Sub Cluster-${AWS::StackName}

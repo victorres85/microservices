@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Combine resource files
+cat resources/resources.yml resources/bucket.yml resources/ecsCluster.yml resources/logs.yml resources/ecsTaskDefinition.yml \
+    resources/alb.yml resources/ecsService.yml resources/vpc.yml resources/subnets.yml resources/internetGateway.yml \
+    resources/natGateway.yml resources/routeTables.yml resources/dynamodbEndpoint.yml resources/securityGroups.yml \
+    resources/roles.yml resources/dynamodbTable.yml resources/environments.yml > template/resources.yml
+
+# Create combined_template
+cat core.yml parameters.yml conditions.yml mapping.yml template/resources.yml outputs.yml > template/combined_template.yml

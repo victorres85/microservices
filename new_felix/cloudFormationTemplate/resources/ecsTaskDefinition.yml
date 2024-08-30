@@ -1,0 +1,31 @@
+
+
+  Felix-k8sMonolithTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Cpu: 256
+      ExecutionRoleArn: !GetAtt EcsServiceRole.Arn
+      Family: !Sub Monolith-Definition-${AWS::StackName}
+      Memory: 512
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      TaskRoleArn: !GetAtt ECSTaskRole.Arn
+      ContainerDefinitions:
+        - Name: monolith-service
+          Image: nginx:latest
+          PortMappings:
+            - ContainerPort: 80
+              Protocol: http
+          Environment:
+            - Name: UPSTREAM_URL
+              Value: !GetAtt Felix-k8sLoadBalancer.DNSName
+            - Name: DDB_TABLE_NAME
+              Value: !Ref Felix-k8sDynamoTable
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref Felix-k8sMonolithLogGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: awslogs-felix-k8s-service
+          Essential: true

@@ -1,0 +1,7 @@
+Parameters:
+  SkipBucket:
+    Type: String
+    Default: "false"
+    AllowedValues:
+      - "true"
+      - "false"

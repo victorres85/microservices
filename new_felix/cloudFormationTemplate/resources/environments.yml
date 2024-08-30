@@ -1,0 +1,9 @@
+
+
+  Felix-k8sEnvironment:
+    Type: AWS::Cloud9::EnvironmentEC2
+    Properties:
+      AutomaticStopTimeMinutes: 30
+      InstanceType: t2.small
+      Name: !Sub Project-${AWS::StackName}
+      SubnetId: !Ref PublicSubnetOne

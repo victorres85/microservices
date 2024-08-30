@@ -1,0 +1,4 @@
+
+
+  Felix-k8sMonolithLogGroup:
+    Type: AWS::Logs::LogGroup

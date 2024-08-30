@@ -1,0 +1,13 @@
+
+
+Resources:
+
+  Mono:
+    Type: AWS::ECR::Repository
+
+  Like:
+    Type: AWS::ECR::Repository
+
+
+
+
